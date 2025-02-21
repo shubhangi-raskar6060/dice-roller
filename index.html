@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dice Roller</title>
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+}
+
+.container {
+    width: 80%;
+    margin: 40px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #c474b2;
+    color: #fff;
+}
+
+.dice-container {
+    width: 50%;
+    margin: 20px auto;
+}
+
+#dice {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+#roll-btn {
+    width: 150px;
+    height: 30px;
+    border: none;
+    border-radius: 5px;
+    background-color: #7e3f0b;
+    color: #fff;
+    cursor: pointer;
+}
+
+#roll-btn:hover {
+    background-color: #2f6f31;
+}
+
+#result {
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+@media only screen and (max-width: 768px) {
+    .container {
+        width: 90%;
+    }
+
+    .dice-container {
+        width: 70%;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    .container {
+        width: 95%;
+    }
+
+    .dice-container {
+        width: 90%;
+    }
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Dice Roller</h1>
+        <div class="dice-container">
+            <img id="dice" src="diceroller.jpg" alt="Dice">
+        </div>
+        <button id="roll-btn">Roll the Dice</button>
+        <p id="result"></p>
+    </div>
+
+    <script>
+        let rollBtn = document.getElementById("roll-btn");
+let dice = document.getElementById("dice");
+
+rollBtn.addEventListener("click", () => {
+    let randomNumber = Math.floor(Math.random() * 6) + 1;
+    dice.src = `dice${randomNumber}.png`;
+});
+</script>
+</body>
+</html>
+
+
