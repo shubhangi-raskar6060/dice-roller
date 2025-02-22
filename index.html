@@ -6,94 +6,125 @@
     <title>Dice Roller</title>
     <style>
         body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
-}
+            font-family: 'Arial', sans-serif;
+            background-color: #e28ac2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
 
-.container {
-    width: 80%;
-    margin: 40px auto;
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    background-color: #c474b2;
-    color: #fff;
-}
+        .container {
+            text-align: center;
+            background:aquamarine;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 250px;
+            height: 400px;
+        }
 
-.dice-container {
-    width: 50%;
-    margin: 20px auto;
-}
+        .dice-img {
+            width: 100px;
+            height: 100px;
+            transition: transform 0.2s ease-in-out;
+            margin: 20px;
+        }
 
-#dice {
-    width: 100%;
-    height: 400px;
-    object-fit: cover;
-    border-radius: 10px;
-}
+        .dice-container {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
 
-#roll-btn {
-    width: 150px;
-    height: 30px;
-    border: none;
-    border-radius: 5px;
-    background-color: #7e3f0b;
-    color: #fff;
-    cursor: pointer;
-}
+        .roll-btn {
+            background-color:navy;
+            color: white;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            padding: 15px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s;
+        }
 
-#roll-btn:hover {
-    background-color: #2f6f31;
-}
+        .roll-btn:hover {
+            background-color: navy;
+        }
 
-#result {
-    font-size: 24px;
-    font-weight: bold;
-    margin-top: 20px;
-}
+        .result {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            margin-top: 15px;
+        }
 
-@media only screen and (max-width: 768px) {
-    .container {
-        width: 90%;
-    }
+        .loading {
+            font-size: 20px;
+            color: #ff6f61;
+        }
 
-    .dice-container {
-        width: 70%;
-    }
-}
+        .dice-roll {
+            animation: roll-animation 1s ease-in-out;
+        }
 
-@media only screen and (max-width: 480px) {
-    .container {
-        width: 95%;
-    }
-
-    .dice-container {
-        width: 90%;
-    }
-}
+        @keyframes roll-animation {
+            0% {
+                transform: rotate(0deg);
+            }
+            50% {
+                transform: rotate(360deg);
+            }
+            100% {
+                transform: rotate(0deg);
+            }
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Dice Roller</h1>
-        <div class="dice-container">
-            <img id="dice" src="diceroller.jpg" alt="Dice">
-        </div>
-        <button id="roll-btn">Roll the Dice</button>
-        <p id="result"></p>
+
+<div class="container">
+    <h1>Dice Roller</h1>
+    <div class="dice-container">
+        <img id="dice" src="./img/diceroller.png" alt="Dice" class="dice-img">
     </div>
+    <button class="roll-btn" onclick="rollDice()">Roll Dice</button>
+    <p class="result" id="result"></p>
+    <p class="loading" id="loading"></p>
+</div>
 
-    <script>
-        let rollBtn = document.getElementById("roll-btn");
-let dice = document.getElementById("dice");
+<script>
+    const diceImages = [
+        "./img/dice(1).png",
+        "./img/dice(2).png",
+        "./img/dice(3).png",
+        "./img/dice(4).png",
+        "./img/dice(5).png",
+        "./img/dice(6).png"
+    ];
 
-rollBtn.addEventListener("click", () => {
-    let randomNumber = Math.floor(Math.random() * 6) + 1;
-    dice.src = `dice${randomNumber}.png`;
-});
+    const dice = document.getElementById('dice');
+    const resultText = document.getElementById('result');
+    const loadingText = document.getElementById('loading');
+
+    function rollDice() {
+        resultText.textContent = '';
+        loadingText.textContent = 'Rolling...';
+        dice.classList.add('dice-roll');
+
+        // Simulate dice rolling effect
+        setTimeout(() => {
+            const randomNumber = Math.floor(Math.random() * 6);
+            dice.src = diceImages[randomNumber];
+            resultText.textContent = `You rolled a ${randomNumber + 1}`;
+            loadingText.textContent = '';
+        }, 1000);
+    }
 </script>
+
 </body>
 </html>
-
 
